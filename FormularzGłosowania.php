@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Głosowanie na najlepszy przedmiot</title>
+    <title>Głosowanie</title>
 </head>
 <body>
 <article>
@@ -11,19 +11,19 @@
 
 
     <label>
-        <input type="radio" name="glos" value="1">WPRG - Warsztaty programistyczne<br/>
+        <input type="radio" name="glos" value="0">WPRG - Warsztaty programistyczne<br/>
     </label>
     <label>
-        <input type="radio" name="glos" value="2">POJ - Programowanie obiektowe w Javie<br/>
+        <input type="radio" name="glos" value="1">POJ - Programowanie obiektowe w Javie<br/>
     </label>
     <label>
-        <input type="radio" name="glos" value="3">ANG - Angielski<br/>
+        <input type="radio" name="glos" value="2">ANG - Angielski<br/>
     </label>
     <label>
-        <input type="radio" name="glos" value="4">AM - Analiza Matematyczna<br/>
+        <input type="radio" name="glos" value="3">AM - Analiza Matematyczna<br/>
     </label>
     <label>
-        <input type="radio" name="glos" value="5">RBD - Relacyjne bazy danych<br/><br/>
+        <input type="radio" name="glos" value="4">RBD - Relacyjne bazy danych<br/><br/>
     </label>
     <input type="submit" value="Prześlij">
 

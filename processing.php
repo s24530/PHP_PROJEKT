@@ -14,10 +14,21 @@
 
 
 function addIP($ip){
-    $ips = fopen("ipadresses.txt","a");
-    fwrite($ips,"\n");
-    fwrite($ips,$ip);
-    fclose($ips);
+    $check = fopen("ipadresses.txt","r");
+    $added=false;
+    while(!feof($check)){
+        if(fgets($check)==$ip){
+            $added=true;
+            break;
+        }
+    }
+    fclose($check);
+    if(!$added) {
+        $ips = fopen("ipadresses.txt", "a");
+        fwrite($ips, "\n");
+        fwrite($ips, $ip);
+        fclose($ips);
+    }
 }
 function displayVotes(){
     echo '<h1>'."Dotychczasowe wyniki".'</h1>'.'<br/>';
@@ -25,7 +36,7 @@ function displayVotes(){
 
     $sum=0;
     while(!feof($votes)) {
-        $sum += fgets($votes);
+        $sum += intval(fgets($votes));
     }
     rewind($votes);
     echo "Liczba głowsów:".'<br/>'.'<br/>';
@@ -33,7 +44,7 @@ function displayVotes(){
     $i=0;
     while(!feof($votes)) {
         $num=fgets($votes);
-        echo $przedmioty[$i].' -> '.$num."-------------------->".round(($num/$sum)*100,2)."%".'<br/>';
+        echo $przedmioty[$i].' -> '.$num."-------------------->".round((intval($num)/$sum)*100,2)."%".'<br/>';
         $i++;
     }
     echo '<br/>';
@@ -51,30 +62,9 @@ function addVotes(){
     }
     fclose($votes);
 
+    $liczba_glosow[$_POST['glos']]+=1;
+    $liczba_glosow[$_POST['glos']]=$liczba_glosow[$_POST['glos']]."\n";
 
-    switch ($_POST['glos']){
-        case 1 :
-            $liczba_glosow[0]+=1;
-            $liczba_glosow[0]=$liczba_glosow[0]."\n";
-            break;
-        case 2 :
-            $liczba_glosow[1]++;
-            $liczba_glosow[1]=$liczba_glosow[1]."\n";
-            break;
-        case 3 :
-            $liczba_glosow[2]++;
-            $liczba_glosow[2]=$liczba_glosow[2]."\n";
-            break;
-        case 4 :
-            $liczba_glosow[3]++;
-            $liczba_glosow[3]=$liczba_glosow[3]."\n";
-            break;
-        case 5 :
-            $liczba_glosow[4]++;
-            break;
-        default:
-            break;
-    }
 
     $votes= fopen("głosy.txt","w+");
 
@@ -91,11 +81,8 @@ if(!isset($_POST['glos'])){
     echo '<a href="FormularzGłosowania.php">Powrót</a>';
 
 }else{
-    if(empty("ipadresses.txt")){
-        addIP($ip);
-        addVotes();
-        displayVotes();
-    }else{
+
+
         $ips=fopen("ipadresses.txt","r");
         $alreadyVoted=false;
         while(!feof($ips)){
@@ -112,7 +99,7 @@ if(!isset($_POST['glos'])){
             addVotes();
             displayVotes();
         }
-    }
+
 
 }
 
