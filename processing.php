@@ -14,7 +14,7 @@
 
 
 function addIP($ip){
-    $check = fopen("ipadresses.txt","r");
+    /**$check = fopen("ipadresses.txt","r");
     $added=false;
     while(!feof($check)){
         if(fgets($check)==$ip){
@@ -22,13 +22,13 @@ function addIP($ip){
             break;
         }
     }
-    fclose($check);
-    if(!$added) {
+    fclose($check);*/
+   // if(!$added) {
         $ips = fopen("ipadresses.txt", "a");
         fwrite($ips, "\n");
         fwrite($ips, $ip);
         fclose($ips);
-    }
+   // }
 }
 function displayVotes(){
     echo '<h1>'."Dotychczasowe wyniki".'</h1>'.'<br/>';
